@@ -6,16 +6,14 @@ import Post from "./interfaces/Post";
 
 import { readFileSync } from "fs";
 
-const d =  readFileSync("./schemas/posts.json", "utf-8");
+const schemaFile =  readFileSync("./schemas/posts.json", "utf-8");
 const app:Express = express();
 app.use(express.json());
 app.post("/validate",(req:Request, res:Response)=>{
-    const b =JSON.parse(d)
-    console.log(req.body);
-   // console.log(postSchema);
+    const schemaObject =JSON.parse(schemaFile)
     const ajv = new Ajv({ allErrors: true});
     addFormats(ajv);
-    const isValid = ajv.compile<Post>(b);
+    const isValid = ajv.compile<Post>(schemaObject);
     if(isValid(req.body.items)){
         console.log("Valid");
         
