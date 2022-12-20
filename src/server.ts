@@ -1,15 +1,22 @@
 import express, {Express,Request, Response} from "express"
-import Ajv from "ajv";
+import Ajv, { AnySchema } from "ajv";
 import addFormats from "ajv-formats";
 import Post from "./interfaces/Post";
-import * as postSchema from "../schemas/posts.json" assert { type: "json" };
+
+
+import { readFileSync } from "fs";
+
+const d =  readFileSync("./schemas/posts.json", "utf-8");
 const app:Express = express();
 app.use(express.json());
 app.post("/validate",(req:Request, res:Response)=>{
+    const b =JSON.parse(d)
+    console.log(req.body);
+   // console.log(postSchema);
     const ajv = new Ajv({ allErrors: true});
     addFormats(ajv);
-    const isValid = ajv.compile<Post>(postSchema);
-    if(isValid(req.body)){
+    const isValid = ajv.compile<Post>(b);
+    if(isValid(req.body.items)){
         console.log("Valid");
         
     }

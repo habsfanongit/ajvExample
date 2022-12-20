@@ -30,7 +30,8 @@
                 "type": "number",
                 "description": "Reviewer ID"
             }
-        }
+        },
+        "required": ["Id", "PostedBy", "category", "UserName","effectiveDate", "reviewerId"]
     }
 }
 
