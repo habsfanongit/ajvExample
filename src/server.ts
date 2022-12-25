@@ -11,7 +11,9 @@ app.use(express.json());
 app.post("/validate",(req:Request, res:Response)=>{
     const schemaObject =JSON.parse(schemaFile)
     const ajv = new Ajv({ allErrors: true});
+   
     addFormats(ajv);
+    
     const isValid = ajv.compile<Post>(schemaObject);
     if(isValid(req.body)){
         console.log("Valid");
@@ -25,6 +27,7 @@ app.post("/validate",(req:Request, res:Response)=>{
 });
 app.post("/validate2",(req:Request, res:Response)=>{
     
+
    if(validator(req.body)){
 console.log("IS VALID");
    }

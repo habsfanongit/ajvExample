@@ -32,8 +32,13 @@
                 "type": "number",
                 "description": "Reviewer ID"
             }
+            
         },
+        "additionalProperties": false,
         "required": ["Id", "PostedBy", "category", "UserName","effectiveDate", "reviewerId"]
-    }
+    },
+    "minItems":1
+    
+    
 }
 
