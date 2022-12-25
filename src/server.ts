@@ -3,6 +3,7 @@ import Ajv, { AnySchema } from "ajv";
 import addFormats from "ajv-formats";
 import Post from "./interfaces/Post";
 import { readFileSync } from "fs";
+import {validator} from "./schemavalidator"
 
 const schemaFile =  readFileSync("./schemas/posts.json", "utf-8");
 const app:Express = express();
@@ -20,6 +21,16 @@ app.post("/validate",(req:Request, res:Response)=>{
         console.log(isValid.errors);
        
     }
+    res.end();
+});
+app.post("/validate2",(req:Request, res:Response)=>{
+    
+   if(validator(req.body)){
+console.log("IS VALID");
+   }
+   else{
+    console.log(validator.errors)
+   }
     res.end();
 });
 app.listen(3000, ()=>{

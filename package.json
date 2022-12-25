@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/server.js",
-  "type": "module",
   "scripts": {
     "start": "pnpm run build && node dist/src/server.js",
     "build": "tsc --project tsconfig.json"
